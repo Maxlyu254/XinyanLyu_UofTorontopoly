@@ -23,6 +23,7 @@ public class PlayersPanel extends JPanel implements PlayerPanelVMListener {
             addPlayerCard(playerVM.getName(), playerVM.getCash(), playerVM.getJailTurn(),
                     playerVM.getPropertyAbbrs(), playerVM.getColor());
         }
+        this.revalidate();
     }
 
     public void addPlayerCard(String name, int cash, int jailTurn, List<String> properties, Color color) {
