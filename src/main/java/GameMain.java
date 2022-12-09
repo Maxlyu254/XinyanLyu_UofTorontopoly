@@ -73,7 +73,7 @@ public class GameMain {
         advanceController.setInputBoundary(advanceInteractor);
         advanceInteractor.setCampaignAccess(campaignAccess);
         advanceInteractor.setOutputBoundary(advancePresenter);
-        rollDiceInteractor.setAdvanceInputBoundary(advanceInteractor);
+        rollDiceInteractor.setNextInputBoundary(advanceInteractor);
 
         //Set up go to jail use case]
         GoToJailInteractor goToJailInteractor = new GoToJailInteractor();
