@@ -1,5 +1,6 @@
 package usecase_rolldice;
 
+import exception.WrongCommandArgsException;
 import usecase_universal.CommandPerformer;
 
 public class RollDiceController implements CommandPerformer{
@@ -24,14 +25,20 @@ public class RollDiceController implements CommandPerformer{
         return userInput.isBlank();
     }
 
-    void performAction() throws Exception {
-        RollDiceInputData inputData = new RollDiceInputData(isUserInputValid());
-        inputBoundary.performAction(inputData);
-    }
-
+    /**
+     * The command accepted by this controller should be in the following pattern: <br>
+     * roll <br>
+     * This command takes in no argument<br>
+     * @param command the command string (user input)
+     */
     @Override
     public void performCommand(String command) throws Exception {
-        performAction();
+        String[] words = command.split("\\s+");
+        if (words.length != 1) {
+            throw new WrongCommandArgsException(0);
+        }
+        RollDiceInputData inputData = new RollDiceInputData(isUserInputValid());
+        inputBoundary.performAction(inputData);
     }
 
     // Getters and Setters

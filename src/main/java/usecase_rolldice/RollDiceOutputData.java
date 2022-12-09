@@ -2,28 +2,18 @@ package usecase_rolldice;
 
 public class RollDiceOutputData {
 
-    String rollDiceMessage;
-    boolean isValidInput;
+    private String message;
 
-    public RollDiceOutputData( String rollDiceMessage, boolean isValidInput){
-        this.rollDiceMessage = rollDiceMessage;
-        this.isValidInput = isValidInput;
+    public RollDiceOutputData( String message){
+        this.message = message;
     }
 
     // Getters and Setters
-    public String getRollDiceMessage() {
-        return rollDiceMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public boolean isValidInput() {
-        return isValidInput;
-    }
-
-    public void setRollDiceMessage(String rollDiceMessage) {
-        this.rollDiceMessage = rollDiceMessage;
-    }
-
-    public void setValidInput(boolean validInput) {
-        isValidInput = validInput;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

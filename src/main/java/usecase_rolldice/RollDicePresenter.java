@@ -3,13 +3,13 @@ import viewmodel.*;
 
 public class RollDicePresenter implements RollDiceOutputBoundary{
 
-    CommandPanelViewModel commandPanelViewModel;
-    BoardPanelViewModel boardPanelViewModel;
+    private CommandPanelViewModel commandPanelViewModel;
+    private InputMapDictionary mapDictionary;
 
-    public RollDicePresenter(CommandPanelViewModel commandPanelViewModel, BoardPanelViewModel boardPanelViewModel,
-                             InputMapDictionary inputMapDict){
+    public RollDicePresenter(CommandPanelViewModel commandPanelViewModel,
+                             InputMapDictionary mapDictionary){
         this.commandPanelViewModel = commandPanelViewModel;
-        this.boardPanelViewModel = boardPanelViewModel;
+        this.mapDictionary = mapDictionary;
 
     }
 
@@ -22,31 +22,28 @@ public class RollDicePresenter implements RollDiceOutputBoundary{
      */
     @Override
     public void performAction(RollDiceOutputData diceOutputData){
+        // Append command line
+        String diceRollMessage = diceOutputData.getMessage();
+        commandPanelViewModel.appendOutput(diceRollMessage);
+        commandPanelViewModel.notifyListeners();
 
-        String diceRollMessage = diceOutputData.getRollDiceMessage();
-
-        if (diceOutputData.isValidInput()){
-            commandPanelViewModel.appendOutput(diceRollMessage);
-        }
-        else{
-            commandPanelViewModel.appendWarning(diceRollMessage);
-        }
-
-    }
-
-    public BoardPanelViewModel getBoardPanelViewModel() {
-        return boardPanelViewModel;
+        // update input map dictionary
+        mapDictionary.setCurrentMapName("after_move");
     }
 
     public CommandPanelViewModel getCommandPanelViewModel() {
         return commandPanelViewModel;
     }
 
-    public void setBoardPanelViewModel(BoardPanelViewModel boardPanelViewModel) {
-        this.boardPanelViewModel = boardPanelViewModel;
+    public InputMapDictionary getMapDictionary() {
+        return mapDictionary;
     }
 
     public void setCommandPanelViewModel(CommandPanelViewModel commandPanelViewModel) {
         this.commandPanelViewModel = commandPanelViewModel;
+    }
+
+    public void setMapDictionary(InputMapDictionary mapDictionary) {
+        this.mapDictionary = mapDictionary;
     }
 }
