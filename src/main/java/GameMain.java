@@ -71,8 +71,8 @@ public class GameMain {
         AdvanceController advanceController = new AdvanceController();
         AdvancePresenter advancePresenter = new AdvancePresenter();
         advanceController.setInputBoundary(advanceInteractor);
-        advanceInteractor.setCampaign(campaignAccess);
-        advanceInteractor.setOutput(advancePresenter);
+        advanceInteractor.setCampaignAccess(campaignAccess);
+        advanceInteractor.setOutputBoundary(advancePresenter);
         rollDiceInteractor.setAdvanceInputBoundary(advanceInteractor);
 
         //Set up go to jail use case]
@@ -167,7 +167,7 @@ public class GameMain {
 
         //Link the input map dictionary to the presenters
         startCampaignPresenter.setMapDictionary(mapDictionary);
-        advancePresenter.setInputMapDictionary(mapDictionary);
+        advancePresenter.setMapDictionary(mapDictionary);
         initiateBuyPropertyPresenter.setInputMapDictionary(mapDictionary);
         confirmBuyPropertyPresenter.setMapDictionary(mapDictionary);
         endTurnPresenter.setMapDictionary(mapDictionary);
@@ -186,6 +186,7 @@ public class GameMain {
 
         //Set up player panel view model
         PlayerPanelViewModel playerPanelVM = new PlayerPanelViewModel();
+
         startCampaignPresenter.setPlayerPanelVM(playerPanelVM);
         goToJailPresenter.setJailPlayerPanelViewModel(playerPanelVM);
         payRentPresenter.setPlayerPanelViewModel(playerPanelVM);
@@ -193,6 +194,7 @@ public class GameMain {
         confirmBuyPropertyPresenter.setPlayerPanelViewModel(playerPanelVM);
         endTurnPresenter.setPlayerPanelVM(playerPanelVM);
         tradePresenter.setPlayerPanelVM(playerPanelVM);
+        advancePresenter.setPlayerPanelVM(playerPanelVM);
 
         playerPanelVM.addListener(playersPanel);
         playerPanelVM.notifyListeners();
@@ -204,8 +206,8 @@ public class GameMain {
         BoardPanelViewModel boardPanelViewModel = new BoardPanelViewModel();
         boardPanelViewModel.setPicPath("gfx/default_board.png");
         startCampaignPresenter.setBoardPanelVM(boardPanelViewModel);
-        advancePresenter.setBoardPanelViewModel(boardPanelViewModel);
-        advancePresenter.setBoardPanelViewModel(boardPanelViewModel);
+        advancePresenter.setBoardPanelVM(boardPanelViewModel);
+        advancePresenter.setBoardPanelVM(boardPanelViewModel);
         goToJailPresenter.setBoardPanelViewModel(boardPanelViewModel);
         confirmBuyPropertyPresenter.setBoardPanelViewModel(boardPanelViewModel);
         tradePresenter.setBoardPanelVM(boardPanelViewModel);
@@ -223,7 +225,7 @@ public class GameMain {
         startDefCampPresenter.setCommandPanelVM(commandPanelViewModel);
         readCampaignPresenter.setCommandPanelVM(commandPanelViewModel);
         rollDicePresenter.setCommandPanelViewModel(commandPanelViewModel);
-        advancePresenter.setCommandPanelViewModel(commandPanelViewModel);
+        advancePresenter.setCommandPanelVM(commandPanelViewModel);
         goToJailPresenter.setCommandPanelViewModel(commandPanelViewModel);
         payRentPresenter.setCommandPanelViewModel(commandPanelViewModel);
         drawCardPresenter.setCommandPanelVM(commandPanelViewModel);
