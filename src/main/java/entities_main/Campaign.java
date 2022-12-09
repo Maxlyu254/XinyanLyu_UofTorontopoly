@@ -109,16 +109,15 @@ public class Campaign implements Serializable {
     /**
      * Get a player by the name of the player. Notice: if there are players of duplicate names in the players
      * @param name name of the player wanted
-     * @return the player of the name
-     * @throws InvalidParameterException when no such player is found.
+     * @return the player of the name, null if no such player is found.
      */
-    public Player getPlayerCalled(String name) throws InvalidParameterException {
+    public Player getPlayerCalled(String name) {
         for (Player p: players) {
             if (p.getName().equals(name)) {
                 return p;
             }
         }
-        throw new InvalidParameterException("No player with name: " + name);
+        return null;
     }
 
     /**
