@@ -5,7 +5,7 @@ import entities_tiles.DrawCardTile;
 import entities_tiles.GoToJailTile;
 import entities_tiles.PropertyTile;
 import entities_tiles.Tile;
-import exception.WrongCommandArgumentException;
+import exception.WrongCommandArgsException;
 import usecase_gotojail.GoToJailInputBoundary;
 import usecase_initiatebuyproperty.InitiateBuyPropertyInputBoundary;
 import entities_main.Player;
@@ -53,7 +53,7 @@ public class AdvanceInteractor implements AdvanceInputBoundary{
         Player player = inputData.isPlayerUnspecified() ?
                 campaign.getCurrentPlayer():
                 campaign.getPlayerCalled(inputData.getPlayername());
-        if (player == null) throw new WrongCommandArgumentException("Player name is invalid");
+        if (player == null) throw new WrongCommandArgsException("Player name is invalid");
 
         // Update player location
         int startPasses = 0;
@@ -64,8 +64,6 @@ public class AdvanceInteractor implements AdvanceInputBoundary{
         } else {
             player.setLocation(player.getLocation() + inputData.getDiceSum());
         }
-
-        // TODO: pick up from here: the input map should be changed and player panel updated
         // From output data for passing the start line
         String message = "";
         if (startPasses == 1) {
@@ -75,7 +73,7 @@ public class AdvanceInteractor implements AdvanceInputBoundary{
                     "times, gained " + (startPasses * START_BONUS) + " T-bucks";
         }
         AdvanceOutputData outputData = new AdvanceOutputData(
-                message, player.getLocation(), campaign.getPlayerIndex(player), player.getCash(), true);
+                message, player.getLocation(), campaign.getPlayerIndex(player), player.getCash(), false);
         outputBoundary.performAction(outputData);
 
         // Perform Tile action

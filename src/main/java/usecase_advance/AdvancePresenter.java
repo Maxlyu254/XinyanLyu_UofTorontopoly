@@ -31,6 +31,7 @@ public class AdvancePresenter implements AdvanceOutputBoundary {
         playerVM.setPosition(outputData.getPlayerLocation());
         playerVM.setCash(outputData.getPlayerCash());
         playerPanelVM.notifyListeners();
+        boardPanelVM.notifyListeners();
 
         // update command panel VM
         String message = outputData.getMessage();

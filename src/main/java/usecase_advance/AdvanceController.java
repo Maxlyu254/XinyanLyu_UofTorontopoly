@@ -1,6 +1,6 @@
 package usecase_advance;
 
-import exception.WrongCommandArgumentException;
+import exception.WrongCommandArgsException;
 import usecase_universal.CommandPerformer;
 
 public class AdvanceController implements CommandPerformer {
@@ -25,10 +25,10 @@ public class AdvanceController implements CommandPerformer {
     public void performCommand(String command) throws Exception {
         String[] words = command.split("\\s+");
         if (words.length != 3) {
-            throw new WrongCommandArgumentException("This command only takes in two arguments");
+            throw new WrongCommandArgsException("This command only takes in two arguments");
         }
         if (! words[2].matches("\\d+")) {
-            throw new WrongCommandArgumentException("The second argument of the command must be a non-negative integer");
+            throw new WrongCommandArgsException("The second argument of the command must be a non-negative integer");
         }
         AdvanceInputData inputData = new AdvanceInputData();
         inputBoundary.performAction(inputData);
