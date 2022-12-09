@@ -9,4 +9,8 @@ public class WrongCommandArgsException extends Exception {
         super(message);
     }
 
+    public WrongCommandArgsException(int argumentNumber) {
+        super("This command only takes in " + argumentNumber + "argument(s)");
+    }
+
 }
