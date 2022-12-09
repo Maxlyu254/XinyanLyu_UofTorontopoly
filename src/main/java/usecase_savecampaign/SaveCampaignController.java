@@ -1,6 +1,6 @@
 package usecase_savecampaign;
 
-import exception.WrongCommandArgumentException;
+import exception.WrongCommandArgsException;
 import usecase_universal.CommandPerformer;
 
 public class SaveCampaignController implements CommandPerformer {
@@ -23,7 +23,7 @@ public class SaveCampaignController implements CommandPerformer {
     public void performCommand(String command) throws Exception {
         String[] words = command.split("\\s+");
         if (words.length != 2)
-            throw new WrongCommandArgumentException("This command only takes in one parameter");
+            throw new WrongCommandArgsException("This command only takes in one parameter");
         String relativePath = words[1];
         SaveCampaignInputData inputData = new SaveCampaignInputData(relativePath);
         inputBoundary.performAction(inputData);

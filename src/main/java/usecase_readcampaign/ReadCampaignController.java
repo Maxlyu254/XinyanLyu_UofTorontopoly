@@ -1,6 +1,6 @@
 package usecase_readcampaign;
 
-import exception.WrongCommandArgumentException;
+import exception.WrongCommandArgsException;
 import usecase_universal.CommandPerformer;
 
 public class ReadCampaignController implements CommandPerformer {
@@ -23,7 +23,7 @@ public class ReadCampaignController implements CommandPerformer {
     @Override
     public void performCommand(String command) throws Exception {
         String[] words = command.split("\\s+");
-        if (words.length != 2) throw new WrongCommandArgumentException("This command only takes 1 variable");
+        if (words.length != 2) throw new WrongCommandArgsException("This command only takes 1 variable");
         ReadCampaignInputData inputData = new ReadCampaignInputData(words[1]);
         inputBoundary.performAction(inputData);
     }

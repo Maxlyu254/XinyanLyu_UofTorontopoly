@@ -1,6 +1,6 @@
 package view;
 
-import exception.WrongCommandArgumentException;
+import exception.WrongCommandArgsException;
 import viewmodel.CommandLineViewModel;
 import viewmodel.CommandPanelVMListener;
 import viewmodel.CommandPanelViewModel;
@@ -130,7 +130,7 @@ public class CommandPanel extends JPanel implements CommandPanelVMListener {
     }
 
     private String getErrorMessage(Exception e) {
-        if (e instanceof WrongCommandArgumentException) {
+        if (e instanceof WrongCommandArgsException) {
             return e.getMessage();
         }
         return "Can't perform command because of Exception (" + e.getClass() + ") Message: " + e.getMessage();

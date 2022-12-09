@@ -1,6 +1,6 @@
 package usecase_endturn;
 
-import exception.WrongCommandArgumentException;
+import exception.WrongCommandArgsException;
 import usecase_universal.CommandPerformer;
 
 public class EndTurnContoller implements CommandPerformer {
@@ -16,7 +16,7 @@ public class EndTurnContoller implements CommandPerformer {
     public void performCommand(String command) throws Exception {
         String[] words = command.split("\\s+");
         if (words.length != 1)
-            throw new WrongCommandArgumentException("This command takes in no argument");
+            throw new WrongCommandArgsException("This command takes in no argument");
         inputBoundary.performAction(new EndTurnInputData());
 
     }
