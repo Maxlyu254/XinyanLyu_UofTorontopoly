@@ -1,5 +1,5 @@
 import usecase_advance.*;
-import usecause_confirmbuyproperty.*;
+import usecase_confirmbuyproperty.*;
 import usecase_drawcard.*;
 import usecase_endturn.*;
 import usecase_gotojail.*;
@@ -139,6 +139,7 @@ public class GameMain {
 
         InputMap anyTimeMap = new InputMap("any_time_commands");
         anyTimeMap.putCommand("trade", tradeController);
+        anyTimeMap.putCommand("debug_advance", advanceController);
 
         InputMap unstartedMap = new InputMap("unstarted");
         unstartedMap.addAppendix(anyTimeMap);
@@ -167,6 +168,7 @@ public class GameMain {
 
         //Link the input map dictionary to the presenters
         startCampaignPresenter.setMapDictionary(mapDictionary);
+        rollDicePresenter.setMapDictionary(mapDictionary);
         advancePresenter.setMapDictionary(mapDictionary);
         initiateBuyPropertyPresenter.setInputMapDictionary(mapDictionary);
         confirmBuyPropertyPresenter.setMapDictionary(mapDictionary);

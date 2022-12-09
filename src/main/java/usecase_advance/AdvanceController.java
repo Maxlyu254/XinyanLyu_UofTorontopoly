@@ -16,7 +16,7 @@ public class AdvanceController implements CommandPerformer {
 
     /**
      * The command accepted by this controller should be in the following pattern: <br>
-     * advance [player] [number] <br>
+     * debug_advance [player] [number] <br>
      * player: the name of the player to be advanced <br>
      * number: the number of tiles to be advanced <br>
      * @param command the command string (user input)
@@ -25,7 +25,7 @@ public class AdvanceController implements CommandPerformer {
     public void performCommand(String command) throws Exception {
         String[] words = command.split("\\s+");
         if (words.length != 3) {
-            throw new WrongCommandArgsException("This command only takes in two arguments");
+            throw new WrongCommandArgsException(2);
         }
         if (! words[2].matches("\\d+")) {
             throw new WrongCommandArgsException("The second argument of the command must be a non-negative integer");
