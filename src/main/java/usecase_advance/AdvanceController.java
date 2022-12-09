@@ -30,7 +30,7 @@ public class AdvanceController implements CommandPerformer {
         if (! words[2].matches("\\d+")) {
             throw new WrongCommandArgsException("The second argument of the command must be a non-negative integer");
         }
-        AdvanceInputData inputData = new AdvanceInputData();
+        AdvanceInputData inputData = new AdvanceInputData(words[1], Integer.parseInt(words[2]));
         inputBoundary.performAction(inputData);
     }
 

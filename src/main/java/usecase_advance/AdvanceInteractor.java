@@ -58,7 +58,7 @@ public class AdvanceInteractor implements AdvanceInputBoundary{
         // Update player location
         int startPasses = 0;
         if (player.getLocation() + inputData.getDiceSum() > campaign.getBoardSize() - 1) {
-            startPasses = player.getLocation() / campaign.getBoardSize();
+            startPasses = (player.getLocation() + inputData.getDiceSum()) / campaign.getBoardSize();
             player.setLocation((player.getLocation() + inputData.getDiceSum()) % campaign.getBoardSize());
             player.gainCash(startPasses * START_BONUS);
         } else {
@@ -69,8 +69,8 @@ public class AdvanceInteractor implements AdvanceInputBoundary{
         if (startPasses == 1) {
             message = "You passed the start tile, gained " + (startPasses * START_BONUS) + " T-bucks";
         } else if (startPasses > 1) {
-            message = "You passed the start tile" + startPasses +
-                    "times, gained " + (startPasses * START_BONUS) + " T-bucks";
+            message = "You passed the start tile " + startPasses +
+                    " times, gained " + (startPasses * START_BONUS) + " T-bucks";
         }
         AdvanceOutputData outputData = new AdvanceOutputData(
                 message, player.getLocation(), campaign.getPlayerIndex(player), player.getCash(), false);
