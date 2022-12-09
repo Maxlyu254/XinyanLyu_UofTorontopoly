@@ -1,19 +1,18 @@
 package usecase_advance;
 
 public class AdvanceOutputData {
-    String message;
-
-    int playerLocation;
-
-    int playerIndex;
-
-    boolean updateInputMap;
+    private String message;
+    private int playerLocation;
+    private int playerIndex;
+    private int playerCash;
+    private boolean updateInputMap;
 
     public AdvanceOutputData(String message, int playerLocation, int playerIndex,
-                             boolean updateInputMap) {
+                             int playerCash, boolean updateInputMap) {
         this.message = message;
         this.playerLocation = playerLocation;
         this.playerIndex = playerIndex;
+        this.playerCash = playerCash;
         this.updateInputMap = updateInputMap;
     }
 
@@ -30,6 +29,10 @@ public class AdvanceOutputData {
         return playerLocation;
     }
 
+    public int getPlayerCash() {
+        return playerCash;
+    }
+
     public boolean isUpdateInputMap() {
         return updateInputMap;
     }
@@ -44,6 +47,10 @@ public class AdvanceOutputData {
 
     public void setPlayerIndex(int playerIndex) {
         this.playerIndex = playerIndex;
+    }
+
+    public void setPlayerCash(int playerCash) {
+        this.playerCash = playerCash;
     }
 
     public void setUpdateInputMap(boolean updateInputMap) {

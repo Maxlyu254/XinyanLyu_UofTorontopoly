@@ -70,9 +70,12 @@ public class AdvanceInteractor implements AdvanceInputBoundary{
         String message = "";
         if (startPasses == 1) {
             message = "You passed the start tile, gained " + (startPasses * START_BONUS) + " T-bucks";
+        } else if (startPasses > 1) {
+            message = "You passed the start tile" + startPasses +
+                    "times, gained " + (startPasses * START_BONUS) + " T-bucks";
         }
         AdvanceOutputData outputData = new AdvanceOutputData(
-                "", player.getLocation(), campaign.getPlayerIndex(player), true);
+                message, player.getLocation(), campaign.getPlayerIndex(player), player.getCash(), true);
         outputBoundary.performAction(outputData);
 
         // Perform Tile action
