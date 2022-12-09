@@ -1,5 +1,6 @@
 package view;
 
+import exception.WrongCommandArgumentException;
 import viewmodel.CommandLineViewModel;
 import viewmodel.CommandPanelVMListener;
 import viewmodel.CommandPanelViewModel;
@@ -22,14 +23,22 @@ public class CommandPanel extends JPanel implements CommandPanelVMListener {
     }
 
     public CommandPanel(CommandPanelViewModel viewModel) {
+        this.viewModel = viewModel;
+
         this.textArea = new JTextArea("OutputArea");
+        textArea.setFont(new Font("Courier New", Font.PLAIN, 12));
         textArea.setEditable(false);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-        textArea.setColumns(32);
+        textArea.setColumns(48);
 
-        this.textField = new JTextField("inputField");
-        textField.setColumns(32);
+        //Add scroll to the text area
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+        this.textField = new JTextField("Command input field");
+        textField.setFont(new Font("Courier New", Font.PLAIN, 12));
+        textField.setColumns(48);
 
         //Listener to the enter key
         textField.addKeyListener(new KeyListener() {
@@ -58,7 +67,7 @@ public class CommandPanel extends JPanel implements CommandPanelVMListener {
                         }
                         //If an exception is thrown from the deeper layers
                         catch (Exception e) {
-                            viewModel.appendError(e.getMessage());
+                            viewModel.appendError(getErrorMessage(e));
                             viewModel.notifyListeners();
                         }
                     }
@@ -77,7 +86,7 @@ public class CommandPanel extends JPanel implements CommandPanelVMListener {
 
         this.setLayout(new BorderLayout());
 
-        this.add(textArea, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.CENTER);
         this.add(textField, BorderLayout.SOUTH);
         this.setSize(200, 900);
     }
@@ -87,7 +96,7 @@ public class CommandPanel extends JPanel implements CommandPanelVMListener {
         textArea.setText("");
         List<CommandLineViewModel> lines = viewModel.getCommandLineVMs();
         if (lines.size() > 0) {
-            for (int i = 0; i < lines.size() && i < 100; i ++) {
+            for (int i = Math.max(0, lines.size() - 100); i < lines.size(); i ++) {
                 CommandLineViewModel lineVM = lines.get(i);
                 textArea.append("[" + lineVM.getType() + "] " + lineVM.getMessage() + "\n\n");
             }
@@ -118,5 +127,12 @@ public class CommandPanel extends JPanel implements CommandPanelVMListener {
 
     public boolean hasViewModel() {
         return !(this.viewModel == null);
+    }
+
+    private String getErrorMessage(Exception e) {
+        if (e instanceof WrongCommandArgumentException) {
+            return e.getMessage();
+        }
+        return "Can't perform command because of Exception (" + e.getClass() + ") Message: " + e.getMessage();
     }
 }
