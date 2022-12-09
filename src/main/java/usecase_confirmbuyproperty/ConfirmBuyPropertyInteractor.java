@@ -1,4 +1,4 @@
-package usecause_confirmbuyproperty;
+package usecase_confirmbuyproperty;
 
 
 import entities_main.Campaign;

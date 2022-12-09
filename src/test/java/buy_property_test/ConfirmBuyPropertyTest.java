@@ -1,6 +1,6 @@
 package buy_property_test;
 
-import usecause_confirmbuyproperty.*;;
+import usecase_confirmbuyproperty.*;;
 import entities_main.Campaign;
 import entities_main.CampaignAccess;
 import entities_main.DefaultCampaignFactory;
