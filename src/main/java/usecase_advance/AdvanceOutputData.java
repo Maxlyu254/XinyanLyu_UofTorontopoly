@@ -1,8 +1,7 @@
 package usecase_advance;
 
 public class AdvanceOutputData {
-    String advanceMessage;
-    boolean isAdvanceSuccess;
+    String message;
 
     int playerLocation;
 
@@ -10,22 +9,17 @@ public class AdvanceOutputData {
 
     boolean updateInputMap;
 
-    public AdvanceOutputData(String advanceMessage, boolean isAdvanceSuccess, int playerLocation, int playerIndex,
+    public AdvanceOutputData(String message, int playerLocation, int playerIndex,
                              boolean updateInputMap) {
-        this.advanceMessage = advanceMessage;
-        this.isAdvanceSuccess = isAdvanceSuccess;
+        this.message = message;
         this.playerLocation = playerLocation;
         this.playerIndex = playerIndex;
         this.updateInputMap = updateInputMap;
     }
 
     //Getter and Setter Methods
-    public String getAdvanceMessage() {
-        return advanceMessage;
-    }
-
-    public boolean isAdvanceSuccess() {
-        return isAdvanceSuccess;
+    public String getMessage() {
+        return message;
     }
 
     public int getPlayerIndex() {
@@ -40,12 +34,8 @@ public class AdvanceOutputData {
         return updateInputMap;
     }
 
-    public void setAdvanceMessage(String advanceMessage) {
-        this.advanceMessage = advanceMessage;
-    }
-
-    public void setAdvanceSuccess(boolean advanceSuccess) {
-        isAdvanceSuccess = advanceSuccess;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public void setPlayerLocation(int playerLocation) {

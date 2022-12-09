@@ -4,21 +4,13 @@ import viewmodel.*;
 
 public class AdvancePresenter implements AdvanceOutputBoundary {
 
-    CommandPanelViewModel commandPanelViewModel;
+    private CommandPanelViewModel commandPanelVM;
 
-    BoardPanelViewModel boardPanelViewModel;
+    private BoardPanelViewModel boardPanelVM;
 
-    PlayerPanelViewModel playerPanelViewModel;
+    private PlayerPanelViewModel playerPanelVM;
 
-    InputMapDictionary inputMapDictionary;
-
-    public AdvancePresenter(CommandPanelViewModel commandPanelViewModel, BoardPanelViewModel boardPanelViewModel,
-                            PlayerPanelViewModel playerPanelViewModel, InputMapDictionary inputMapDictionary){
-        this.commandPanelViewModel = commandPanelViewModel;
-        this.boardPanelViewModel = boardPanelViewModel;
-        this.playerPanelViewModel = playerPanelViewModel;
-        this.inputMapDictionary = inputMapDictionary;
-    }
+    private InputMapDictionary mapDictionary;
 
     public AdvancePresenter(){
 
@@ -34,56 +26,54 @@ public class AdvancePresenter implements AdvanceOutputBoundary {
 
         int playerIndex = outputData.getPlayerIndex();
 
-        PlayerViewModel playerVM = playerPanelViewModel.getPlayerVMAt(playerIndex);
+        // update player panel VM
+        PlayerViewModel playerVM = playerPanelVM.getPlayerVMAt(playerIndex);
+        playerVM.setPosition(outputData.getPlayerLocation());
+        playerPanelVM.notifyListeners();
 
-        String advanceMessage = outputData.getAdvanceMessage();
-        if (outputData.isAdvanceSuccess()){
-            commandPanelViewModel.appendOutput(advanceMessage);
-            playerVM.setPosition(outputData.getPlayerLocation());
-
-            playerPanelViewModel.notifyListeners();
-        } else {
-            commandPanelViewModel.appendError(advanceMessage);
+        // update command panel VM
+        String message = outputData.getMessage();
+        if (! message.isEmpty()) {
+            commandPanelVM.appendOutput(message);
+            commandPanelVM.notifyListeners();
         }
 
+        // update input map dictionary
         if (outputData.isUpdateInputMap()){
-            inputMapDictionary.setCurrentMapName("after_move");
-
+            mapDictionary.setCurrentMapName("after_move");
         }
-
-        commandPanelViewModel.notifyListeners();
     }
 
     //Getters and Setters
-    public void setCommandPanelViewModel(CommandPanelViewModel commandPanelViewModel) {
-        this.commandPanelViewModel = commandPanelViewModel;
+    public void setCommandPanelVM(CommandPanelViewModel commandPanelVM) {
+        this.commandPanelVM = commandPanelVM;
     }
 
-    public void setBoardPanelViewModel(BoardPanelViewModel boardPanelViewModel) {
-        this.boardPanelViewModel = boardPanelViewModel;
+    public void setBoardPanelVM(BoardPanelViewModel boardPanelVM) {
+        this.boardPanelVM = boardPanelVM;
     }
 
-    public void setInputMapDictionary(InputMapDictionary inputMapDictionary) {
-        this.inputMapDictionary = inputMapDictionary;
+    public void setMapDictionary(InputMapDictionary mapDictionary) {
+        this.mapDictionary = mapDictionary;
     }
 
-    public void setPlayerPanelViewModel(PlayerPanelViewModel playerPanelViewModel) {
-        this.playerPanelViewModel = playerPanelViewModel;
+    public void setPlayerPanelVM(PlayerPanelViewModel playerPanelVM) {
+        this.playerPanelVM = playerPanelVM;
     }
 
-    public CommandPanelViewModel getCommandPanelViewModel() {
-        return commandPanelViewModel;
+    public CommandPanelViewModel getCommandPanelVM() {
+        return commandPanelVM;
     }
 
-    public BoardPanelViewModel getBoardPanelViewModel() {
-        return boardPanelViewModel;
+    public BoardPanelViewModel getBoardPanelVM() {
+        return boardPanelVM;
     }
 
-    public InputMapDictionary getInputMapDictionary() {
-        return inputMapDictionary;
+    public InputMapDictionary getMapDictionary() {
+        return mapDictionary;
     }
 
-    public PlayerPanelViewModel getPlayerPanelViewModel() {
-        return playerPanelViewModel;
+    public PlayerPanelViewModel getPlayerPanelVM() {
+        return playerPanelVM;
     }
 }

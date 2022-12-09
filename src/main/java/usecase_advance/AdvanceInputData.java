@@ -1,28 +1,50 @@
 package usecase_advance;
 
-public class AdvanceInputData {
-    boolean confirmRoll;
-    int diceSum;
+import java.util.Objects;
 
-    public AdvanceInputData(int diceSum) {
-        this.confirmRoll = true;
+public class AdvanceInputData {
+    public static final String PLAYER_UNSPECIFIED = null;
+    private String playername;
+    private int diceSum;
+
+    public AdvanceInputData(String playername, int diceSum) {
+        this.playername = playername;
         this.diceSum = diceSum;
     }
 
-    // Getters and Setters
-    public boolean isConfirmRoll() {
-        return confirmRoll;
+    public AdvanceInputData(int diceSum) {
+        this.playername = PLAYER_UNSPECIFIED;
+        this.diceSum = diceSum;
     }
+
+    public AdvanceInputData() {
+
+    }
+
+    //getters
 
     public int getDiceSum() {
         return diceSum;
     }
 
-    public void setConfirmRoll(boolean confirmRoll) {
-        this.confirmRoll = confirmRoll;
+    public String getPlayername() {
+        return playername;
     }
+
+    //setters
 
     public void setDiceSum(int diceSum) {
         this.diceSum = diceSum;
     }
+
+    public void setPlayername(String playername) {
+        this.playername = playername;
+    }
+
+    //other getters
+
+    public boolean isPlayerUnspecified() {
+        return Objects.equals(playername, PLAYER_UNSPECIFIED);
+    }
 }
+

@@ -1,20 +1,36 @@
 package usecase_advance;
 
-public class AdvanceController {
+import exception.WrongCommandArgumentException;
+import usecase_universal.CommandPerformer;
+
+public class AdvanceController implements CommandPerformer {
 
     private AdvanceInputBoundary inputBoundary;
-    int diceSum;
 
-    public AdvanceController(AdvanceInputBoundary inputBoundary, int diceSum) {
+    public AdvanceController(AdvanceInputBoundary inputBoundary) {
         this.inputBoundary = inputBoundary;
-        this.diceSum = diceSum;
     }
 
     public AdvanceController() {
     }
 
-    void performAction() throws Exception {
-        AdvanceInputData inputData = new AdvanceInputData(diceSum);
+    /**
+     * The command accepted by this controller should be in the following pattern: <br>
+     * advance [player] [number] <br>
+     * player: the name of the player to be advanced <br>
+     * number: the number of tiles to be advanced <br>
+     * @param command the command string (user input)
+     */
+    @Override
+    public void performCommand(String command) throws Exception {
+        String[] words = command.split("\\s+");
+        if (words.length != 3) {
+            throw new WrongCommandArgumentException("This command only takes in two arguments");
+        }
+        if (! words[2].matches("\\d+")) {
+            throw new WrongCommandArgumentException("The second argument of the command must be a non-negative integer");
+        }
+        AdvanceInputData inputData = new AdvanceInputData();
         inputBoundary.performAction(inputData);
     }
 
@@ -22,14 +38,6 @@ public class AdvanceController {
 
     public AdvanceInputBoundary getInputBoundary() {
         return inputBoundary;
-    }
-
-    public int getDiceSum() {
-        return diceSum;
-    }
-
-    public void setDiceSum(int diceSum) {
-        this.diceSum = diceSum;
     }
 
     public void setInputBoundary(AdvanceInputBoundary inputBoundary) {
